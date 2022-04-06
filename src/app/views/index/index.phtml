@@ -1,0 +1,36 @@
+<div class="text-center">
+<?php
+echo '<h1 class="text-success text-center">Search Locations</h1>';
+echo $this->tag->form('');
+echo $this->tag->textField(
+    [
+        "search",
+        'class'=>"form-control w-25 d-inline",
+        'placeholder' => 'Enter location,  or long,lat'
+    ]
+);
+echo $this->tag->submitButton(['Get Locations', 'class'=>"btn btn-success mx-2"]);
+?>
+</form>
+</div>
+<hr>
+<div class="row">
+<?php
+if (isset($locations)) {
+    foreach ($locations as $loc) {
+        echo'<div class="col-3">
+                <div class="card mt-3" style="width: 18rem;">
+                    <div class="card-body shadow">
+                        <h5 class="card-title">'.$loc['name'].'</h5>
+                        <small class="card-text"><span class="text-success">Region: </span>'.$loc['region'].'</small><br>
+                        <small class="card-text"><span class="text-success">Country: </span>'.$loc['country'].'</small><br>
+                        <small class="card-text"><span class="text-success">Lattitude: </span>'.$loc['lat'].'</small><br>
+                        <small class="card-text"><span class="text-success">Longitude: </span>'.$loc['lon'].'</small><br>
+                        <a href="/index/details/'.$loc['name'].'" class="btn btn-sm btn-outline-success mt-1">See Details</a>
+                    </div>
+                </div>
+            </div>';
+    }
+    echo '</div>';
+}
+

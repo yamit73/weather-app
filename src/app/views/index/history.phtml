@@ -1,0 +1,42 @@
+<div class="text-center">
+    <h1 class="text-success text-center">History</h1>
+</div>
+<hr>
+<div class="container w-75 m-auto border shadow">
+    <h2 class="text-start">
+        <?php echo $details['location']['name'] ?>
+        <span class="h5"><img src="<?php echo $details['current']['condition']['icon']; ?>"></span>
+        <span class="text-dark h5"><?php echo $details['current']['condition']['text']; ?></span>
+        
+    </h2>
+    <hr>
+    <h3>Date:&nbsp; <?php echo $details['forecast']['forecastday'][0]['date'] ?></h3>
+    <table class="table table-hover">
+        <thead class="bg-dark text-light">
+            <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Condition</th>
+            <th scope="col">Temp</th>
+            <th scope="col">Wind</th>
+            <th scope="col">Humidity</th>
+            <th scope="col">Cloud</th>
+            <th scope="col">Chance of rain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($details['forecast']['forecastday'][0]['hour'] as $day) {
+                echo'<tr>
+                        <th scope="row">'.explode(" ",$day['time'])[1].'</th>
+                        <td><img src="'.$day['condition']['icon'].'"><br><small>'.$day['condition']['text'].'</small></td>
+                        <td>'.$day['temp_c'].'°C</td>
+                        <td>'.$day['wind_kph'].' Km/H, Dir: '.$day['wind_dir'].'</td>
+                        <td>'.$day['humidity'].'%</td>
+                        <td>'.$day['cloud'].'%</td>
+                        <td>'.$day['chance_of_rain'].'%</td>
+                    </tr>';
+            }
+            ?>
+        </tbody>
+    </table>
+</div>

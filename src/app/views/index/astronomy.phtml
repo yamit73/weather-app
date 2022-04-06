@@ -1,0 +1,30 @@
+<div class="text-center">
+    <h1 class="text-success text-center">Astronomy Details</h1>
+</div>
+<hr>
+<div class="container w-75 m-auto border shadow">
+    <h2 class="text-start">
+        <?php echo $details['location']['name'] ?>
+    </h2>
+    <hr>
+    <span class="text-danger h5">Location-</span>
+        <span class="mx-2">Country: &nbsp;<?php echo $details['location']['country'] ?> </span>
+        <span class="mx-2">Region: &nbsp<?php echo $details['location']['region'] ?> </span>
+        <span class="mx-2">Long: &nbsp<?php echo $details['location']['lon'] ?> </span>
+        <span class="mx-2">Lat: &nbsp<?php echo $details['location']['lat'] ?> </span>
+        <span class="mx-2">timezone: &nbsp<?php echo $details['location']['tz_id'] ?> </span>
+    </p>
+    <p>
+        <span class="text-danger h5">Astronomy-</span>
+        <span class="mx-2">Sunrise: &nbsp;<?php echo $details['astronomy']['astro']['sunrise']; ?> </span>
+        <span class="mx-2">Sunset: &nbsp<?php echo $details['astronomy']['astro']['sunset']; ?> </span>
+        <span class="mx-2">Moonrise: &nbsp<?php echo $details['astronomy']['astro']['moonrise']; ?> </span>
+        <span class="mx-2">moonset: &nbsp<?php echo $details['astronomy']['astro']['moonset']; ?> </span>
+        <span class="mx-2">Moonphase: &nbsp<?php echo $details['astronomy']['astro']['moon_phase']; ?> </span>
+    </p>
+</div>
+<?php
+// echo'<pre>';
+// print_r($details);
+
+

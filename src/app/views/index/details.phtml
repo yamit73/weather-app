@@ -1,0 +1,49 @@
+<div class="text-center">
+    <h1 class="text-success text-center">Details</h1>
+</div>
+<hr>
+<div class="container w-50 m-auto border shadow">
+    <h2 class="text-start">
+        <?php echo $details['location']['name'] ?>
+        <span class="h5"><img src="<?php echo $details['current']['condition']['icon']; ?>"></span>
+        
+    </h2>
+    <hr>
+    <p>
+    <span class="text-danger h5">Condition-</span>
+    <span class="text-dark h5"><?php echo $details['current']['condition']['text']; ?></span>
+    <p>
+    <span class="text-danger h5">Location-</span>
+        <span class="mx-2">Country: &nbsp;<?php echo $details['location']['country'] ?> </span>
+        <span class="mx-2">Region: &nbsp<?php echo $details['location']['region'] ?> </span>
+        <span class="mx-2">Long: &nbsp<?php echo $details['location']['lon'] ?> </span>
+        <span class="mx-2">Lat: &nbsp<?php echo $details['location']['lat'] ?> </span>
+    </p>
+    <p>
+        <span class="text-danger h5">Temperature-</span>
+        <span class="mx-2">In Celcius: &nbsp;<?php echo $details['current']['temp_c'].'°C'; ?> </span>
+        <span class="mx-2">In Farenheit: &nbsp<?php echo $details['current']['temp_f'].'°F'; ?> </span>
+        <span class="mx-2">Feels like: &nbsp<?php echo $details['current']['feelslike_c'].'°C ,'.$details['current']['feelslike_c'].'°F'; ?> </span>
+    </p>
+    <p>
+        <span class="text-danger h5">Wind-</span>
+        <span class="mx-2">Speed: &nbsp;<?php echo $details['current']['wind_mph'].' m/h , '.$details['current']['wind_kph'].' k/h'; ?> </span> 
+        <span class="mx-2">Direction: &nbsp<?php echo $details['current']['wind_dir']; ?> </span>
+        <span class="mx-2">Humidity: &nbsp<?php echo $details['current']['humidity'].'%'; ?> </span>
+    </p>
+    <hr>
+    <div class="text-center pb-4">
+        <a href="/index/forecast/<?php echo $details['location']['name'] ?>" class="btn btn-sm btn-outline-success">Forecast</a>
+        <a href="/index/history/<?php echo $details['location']['name'] ?>" class="btn btn-sm btn-outline-success mx-1">History</a>
+        <a href="/index/timezone/<?php echo $details['location']['name'] ?>" class="btn btn-sm btn-outline-success mx-1">Time Zone</a>
+        <a href="/index/sports/<?php echo $details['location']['name'] ?>" class="btn btn-sm btn-outline-success mx-1">Sports</a>
+        <a href="/index/astronomy/<?php echo $details['location']['name'] ?>" class="btn btn-sm btn-outline-success mx-1">Astronomy</a>
+        <a href="/index/weather_alert" class="btn btn-sm btn-outline-success mx-1">Weather Alerts</a>
+        <a href="/index/air_quality" class="btn btn-sm btn-outline-success">Air Quality</a>
+    </div>
+</div>
+<?php
+// echo'<pre>';
+// print_r($details);
+
+

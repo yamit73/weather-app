@@ -1,0 +1,41 @@
+<div class="text-center">
+    <h1 class="text-success text-center">Alert!</h1>
+</div>
+<hr>
+<div class="container-fluid m-auto border shadow">
+    <h2 class="text-start">
+        <?php echo $details['location']['name'] ?>
+        <span class="h5"><img src="<?php echo $details['current']['condition']['icon']; ?>"></span>
+        <span class="text-dark h5"><?php echo $details['current']['condition']['text']; ?></span>
+        
+    </h2>
+    <hr>
+    <table class="table table-hover">
+        <thead class="bg-dark text-light">
+            <tr>
+            <th scope="col">Headline</th>
+            <th scope="col">Category</th>
+            <th scope="col">Effective</th>
+            <th scope="col">Expires</th>
+            <th scope="col">Description</th>
+            <th scope="col">Instruction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($details['alerts']['alert'] as $alert) {
+                echo '<tr>
+                        <td>'.$alert['headline'].'</td>
+                        <td>'.$alert['category'].'</td>
+                        <td>'.$alert['event'].'</td>
+                        <td>'.$alert['effective'].'</td>
+                        <td>'.$alert['expires'].'</td>
+                        <td>'.$alert['desc'].'</td>
+                        <td>'.$alert['instruction'].'</td>
+                    </tr>';
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+

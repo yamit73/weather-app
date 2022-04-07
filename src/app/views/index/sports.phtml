@@ -16,15 +16,18 @@
         </thead>
         <tbody>
             <?php
-            foreach($details['football'] as $day) {
-                echo'<tr>
-                        <th scope="row">Football</th>
-                        <td>'.$day['country'].'</td>
-                        <td>'.$day['stadium'].'</td>
-                        <td>'.$day['tournament'].'</td>
-                        <td>'.$day['start'].'</td>
-                        <td>'.$day['match'].'</td>
+            foreach($details as $key=>$val) {
+                foreach ($val as $v) {
+                    echo'<tr>
+                        <th scope="row">'.$key.'</th>
+                        <td>'.$v['country'].'</td>
+                        <td>'.$v['stadium'].'</td>
+                        <td>'.$v['tournament'].'</td>
+                        <td>'.$v['match'].'</td>
+                        <td>'.$v['start'].'</td>
                     </tr>';
+                }
+                
             }
             ?>
         </tbody>

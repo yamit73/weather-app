@@ -1,14 +1,14 @@
 <?php
 
 use Phalcon\Mvc\Controller;
-use GuzzleHttp\Client;
+
 /**
  * Class to simple use of API
  */
 class IndexController extends Controller
 {
     /**
-     * Book search
+     * Location search
      * Api call
      *
      * @return void
@@ -17,11 +17,8 @@ class IndexController extends Controller
     {
         if ($this->request->isPost()) {
             $q = $this->request->getPost('search');
-            $key='0bab7dd1bacc418689b143833220304';
-            $client = new Client([
-                // Base URI is used with relative requests
-                'base_uri' => 'http://api.weatherapi.com/v1/',
-            ]);
+            $key=$this->di->get('config')->get('app')->get('key');
+            $client=$this->di->get('client');
             $response=$client->request('GET', 'search.json?key='.$key.'&q='.$q.'');
             $this->view->locations=json_decode($response->getBody(), true);
         } 
@@ -34,11 +31,8 @@ class IndexController extends Controller
      */
     public function detailsAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
         $response=$client->request('GET', 'current.json?key='.$key.'&q='.urlencode($q).'');
         $this->view->details=json_decode($response->getBody(), true);
     }
@@ -52,12 +46,9 @@ class IndexController extends Controller
 
     public function forecastAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
-        $response=$client->request('GET', 'forecast.json?key='.$key.'&q='.$q.'&days=10&aqi=yes&alerts=yes');
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
+        $response=$client->request('GET', 'forecast.json?key='.$key.'&q='.$q.'&days=3');
         $this->view->details=json_decode($response->getBody(), true);
     }
 
@@ -70,11 +61,8 @@ class IndexController extends Controller
 
     public function historyAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
         $response=$client->request('GET', 'forecast.json?key='.$key.'&q='.$q.'&dt='.date('Y-m-d').'');
         $this->view->details=json_decode($response->getBody(), true);
     }
@@ -88,11 +76,8 @@ class IndexController extends Controller
 
     public function timezoneAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
         $response=$client->request('GET', 'timezone.json?key='.$key.'&q='.urlencode($q).'');
         $this->view->details=json_decode($response->getBody(), true);
     }
@@ -106,42 +91,53 @@ class IndexController extends Controller
 
     public function sportsAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
         $response=$client->request('GET', 'sports.json?key='.$key.'&q='.urlencode($q).'');
         $this->view->details=json_decode($response->getBody(), true);
     }
+
+    /**
+     * function to get astronomy details of a location
+     *
+     * @param [type] $q
+     * @return void
+     */
+
     public function astronomyAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
         $response=$client->request('GET', 'astronomy.json?key='.$key.'&q='.urlencode($q).'');
         $this->view->details=json_decode($response->getBody(), true);
     }
-    public function weather_alertAction($q)
+
+    /**
+     * function to get weather alerts of a location
+     *
+     * @param [type] $q
+     * @return void
+     */
+
+    public function weatherAlertAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
-        $response=$client->request('GET', 'current.json?key='.$key.'&q='.urlencode($q).'');
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
+        $response=$client->request('GET', 'forecast.json?key='.$key.'&q='.$q.'&days=1&alerts=yes');
         $this->view->details=json_decode($response->getBody(), true);
     }
-    public function air_qualityAction($q)
+
+    /**
+     * Function to get airquality of a location
+     *
+     * @param [type] $q
+     * @return void
+     */
+    public function airQualityAction($q)
     {
-        $key='0bab7dd1bacc418689b143833220304';
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'http://api.weatherapi.com/v1/',
-        ]);
-        $response=$client->request('GET', 'current.json?key='.$key.'&q='.urlencode($q).'');
+        $key=$this->di->get('config')->get('app')->get('key');
+        $client = $this->di->get('client');
+        $response=$client->request('GET', 'forecast.json?key='.$key.'&q='.$q.'&days=1&aqi=yes');
         $this->view->details=json_decode($response->getBody(), true);
     }
 }

@@ -5,6 +5,8 @@ use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Url;
+
+use GuzzleHttp\Client;
 /**
  * Required classes for DB
  */
@@ -70,6 +72,19 @@ $container->set(
         $factory=new ConfigFactory();
         return $factory->newInstance('php', $file);
     }
+);
+
+//Di container for guzzle client
+$container->set(
+    'client',
+    function() {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'http://api.weatherapi.com/v1/',
+        ]);
+        return $client;
+    },
+    true
 );
 
 //Creating object of application class
